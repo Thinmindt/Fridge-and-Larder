@@ -1,0 +1,6 @@
+{
+  "appId": "com.plotsandschemes.fridgeandlarder",
+  "appName": "Fridge and Larder",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
