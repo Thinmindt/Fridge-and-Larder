@@ -11,3 +11,15 @@ services:
     ports:
       - "8000:8000"
       - "5000:5000"
+  
+  server:
+    build: ./server
+    container_name: server
+    restart: always
+    environment:
+      - FLASK_ENV=development
+    # mounted volumes for hot reloading
+    volumes:
+      - './server:/server'
+    ports:
+      - "5001:5001"

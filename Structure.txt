@@ -14,5 +14,6 @@ Use GraphQL sessions to keep user updated on any additions or deletions to the l
 
 To start developing:
   - In base directory run 'docker-compose up' 
-  - Navigate to localhost:8000 and navigate to the Tasks/serve tab
+  - Navigate to localhost:8000 and import the project at /client, not the one at /app
+  - Navigate to the Tasks/serve tab
   - Change Parameters settings Host to '0.0.0.0' and Port to '5000'
