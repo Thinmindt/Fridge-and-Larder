@@ -1,0 +1,12 @@
+This app is a simple grocery list meant to be shared between members of the same household.
+
+Client:
+  Web app
+  Android
+Server:
+  GraphQL
+  Python
+  Postgres
+
+Note:
+Use GraphQL sessions to keep user updated on any additions or deletions to the list while in use.

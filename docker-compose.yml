@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  client:
+    build: ./client
+    container_name: client
+    restart: always
+    # mounted volumes for hot reloading
+    volumes:
+      - './client:/client'
+    ports:
+      - "8000:8000"
+      - "5000:5000"
