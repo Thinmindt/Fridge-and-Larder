@@ -5,8 +5,14 @@ Client:
   Android
 Server:
   GraphQL
-  Python
+  Python/Flask
   Postgres
 
 Note:
 Use GraphQL sessions to keep user updated on any additions or deletions to the list while in use.
+
+
+To start developing:
+  - In base directory run 'docker-compose up' 
+  - Navigate to localhost:8000 and navigate to the Tasks/serve tab
+  - Change Parameters settings Host to '0.0.0.0' and Port to '5000'
