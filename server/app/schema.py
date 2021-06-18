@@ -36,6 +36,7 @@ class CreateGroceryItem(graphene.Mutation):
 class Query(graphene.ObjectType):
   node = graphene.relay.Node.Field()
   all_grocery_items = SQLAlchemyConnectionField(GroceryItemObject)
+  grocery_item = graphene.relay.Node.Field(GroceryItemObject)
 
 class Mutation(graphene.ObjectType):
   create_grocery_item = CreateGroceryItem.Field()
