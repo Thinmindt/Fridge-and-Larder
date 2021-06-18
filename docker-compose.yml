@@ -9,17 +9,38 @@ services:
     volumes:
       - './client:/client'
     ports:
-      - "8000:8000"
       - "5000:5000"
+      - "8000:8000"
+    depends_on:
+      - database
+      - server
   
   server:
     build: ./server
     container_name: server
     restart: always
-    environment:
-      - FLASK_ENV=development
+    command: python manage.py run -h 0.0.0.0 -p 5001
+    env_file:
+      - ./server/.env.dev
     # mounted volumes for hot reloading
     volumes:
       - './server:/server'
     ports:
       - "5001:5001"
+    depends_on:
+      - database
+    
+  database:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgres/data
+    environment:
+      POSTGRESS_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: /run/secrets/db_password
+    secrets:
+      - db_password
+
+secrets:
+  db_password:
+    file: db_password.txt

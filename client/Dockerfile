@@ -1,5 +1,5 @@
 FROM node:14.17-alpine as build-vue
-WORKDIR /app
+WORKDIR /client
 # copy dependency info for npm install
 RUN npm install -g @vue/cli
 COPY ["./package.json", "./package-log.json*", "./"]

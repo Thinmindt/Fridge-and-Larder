@@ -12,8 +12,14 @@ Note:
 Use GraphQL sessions to keep user updated on any additions or deletions to the list while in use.
 
 
+To set up environment:
+  - in root directory, create a file called "create db_password.txt" for postgres user db_password and enter {random key}
+  - in server directory, create a file called ".env.dev" and enter:
+    DATABASE_URL=postgresql://postgres:{random key}@database:5432/postgres
+    where {random key} is the contents of the db_password.txt file.
 To start developing:
-  - In base directory run 'docker-compose up' 
-  - Navigate to localhost:8000 and import the project at /client, not the one at /app
+  - In base directory run 'docker-compose up'
+  - Navigate to localhost:8000 and import the project at /client
   - Navigate to the Tasks/serve tab
   - Change Parameters settings Host to '0.0.0.0' and Port to '5000'
+  - Serve the client from the CLI for hot reloading.
