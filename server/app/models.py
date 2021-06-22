@@ -10,5 +10,9 @@ class GroceryItem(db.Model):
   label = db.Column(db.Text, nullable=False, index=True)
   is_done = db.Column(db.Boolean, nullable=False)
 
+  def __init__(self, label, is_done=False):
+    self.label = label
+    self.is_done = is_done
+
   def __repr__(self):
     return '<GroceryItem {}>'.format(self.label)
