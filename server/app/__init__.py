@@ -10,7 +10,7 @@ migrate = Migrate()
 def create_app(test_config=None):
   app = Flask(__name__)
   app.debug = True
-  
+
   if test_config is None:
     app.config.from_object(Config)
   else:

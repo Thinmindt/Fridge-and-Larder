@@ -23,8 +23,7 @@ def get_db_entry_from_gql_input(model, input):
   """
   data = gql_input_to_dictionary(input)
   print(data)
-  database_entry = db.session.query(model).filter_by(id=data['id']).first()
-  print(database_entry)
+  database_entry = get_entry_by_id(model, data['id'])
   return database_entry
 
 def gql_input_to_dictionary(input):
@@ -41,7 +40,14 @@ def gql_input_to_dictionary(input):
   for key in input:
     # Convert GraphQL global id to database id
     if key == 'id':
-      id = from_global_id(input[key])[1]
-    dictionary[key] = id
-    print("converted to: {}".format(dictionary))
+      dictionary['id'] = int(from_global_id(input[key])[1])
+    else:
+      dictionary[key] = input[key]
+  print("converted to:           {}".format(dictionary))
   return dictionary
+
+def get_entry_by_id(model, id):
+  """Obtain entry of type model by specified id
+  """
+  print(model, id)
+  return db.session.query(model).filter_by(id=id).first()

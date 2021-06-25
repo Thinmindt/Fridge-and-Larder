@@ -12,6 +12,7 @@ TEST_DATABASE_URI = 'sqlite:///' + TESTDB_PATH
 def app(request):
   """Session-wide test `Flask` application."""
   settings_override = {
+    'SQLALCHEMY_TRACK_MODIFICATIONS': False,
     'TESTING': True,
     'SQLALCHEMY_DATABASE_URI': TEST_DATABASE_URI
   }
