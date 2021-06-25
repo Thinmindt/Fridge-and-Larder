@@ -4,6 +4,9 @@ import os
 from app import create_app
 from app import db as _db
 
+from graphene.test import Client
+from app.schema import schema
+
 TESTDB = 'test_project.db'
 TESTDB_PATH = os.path.join(os.path.dirname(__file__), "test_database", TESTDB)
 TEST_DATABASE_URI = 'sqlite:///' + TESTDB_PATH
@@ -60,3 +63,8 @@ def session(db, request):
 
   request.addfinalizer(teardown)
   return session
+
+@pytest.fixture(scope='function')
+def graphene_client():
+  return Client(schema)
+  
