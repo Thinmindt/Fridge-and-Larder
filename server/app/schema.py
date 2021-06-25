@@ -1,7 +1,7 @@
 import graphene
 from graphene_sqlalchemy import SQLAlchemyConnectionField
 from graphql_relay.node.node import from_global_id
-from app.grocery_item_schema import GroceryItemObject, CreateGroceryItem, DeleteGroceryItem
+from app.grocery_item_schema import GroceryItemObject, CreateGroceryItem, DeleteGroceryItem, ModifyGroceryItem
 
 class Query(graphene.ObjectType):
   node = graphene.relay.Node.Field()
@@ -11,5 +11,6 @@ class Query(graphene.ObjectType):
 class Mutation(graphene.ObjectType):
   create_grocery_item = CreateGroceryItem.Field()
   delete_grocery_item = DeleteGroceryItem.Field()
+  modify_grocery_item = ModifyGroceryItem.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

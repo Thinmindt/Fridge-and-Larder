@@ -27,6 +27,30 @@ snapshots['test_delete_grocery_item 1'] = {
     }
 }
 
+snapshots['test_modify_grocery_item 1'] = {
+    'data': {
+        'modifyGroceryItem': {
+            'groceryItem': {
+                'id': 'R3JvY2VyeUl0ZW1PYmplY3Q6MQ==',
+                'isDone': False,
+                'label': 'Onions'
+            }
+        }
+    }
+}
+
+snapshots['test_modify_grocery_item 2'] = {
+    'data': {
+        'modifyGroceryItem': {
+            'groceryItem': {
+                'id': 'R3JvY2VyeUl0ZW1PYmplY3Q6MQ==',
+                'isDone': True,
+                'label': 'Onions'
+            }
+        }
+    }
+}
+
 snapshots['test_query_all_grocery_items 1'] = {
     'data': {
         'allGroceryItems': {

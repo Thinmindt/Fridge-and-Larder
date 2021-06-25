@@ -51,3 +51,14 @@ def get_entry_by_id(model, id):
   """
   print(model, id)
   return db.session.query(model).filter_by(id=id).first()
+
+def modify_db_entry_with_new_input(original, input):
+  """Change any values listed in input
+  """
+  for key in input:
+    if key == 'label':
+      original.label = input[key]
+    if key == 'is_done':
+      original.is_done = input[key]
+  db.session.commit()
+  return original

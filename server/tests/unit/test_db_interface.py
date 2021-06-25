@@ -64,6 +64,27 @@ def test_db_entry_from_gql_input(session):
 
   assert grocery_item == test_grocery_item
 
+def test_modify_db_entry_with_new_input(session):
+  grocery_item = GroceryItem(label="Onions")
+  
+  add_entry_to_db(grocery_item)
+  modify_entry_1 = { 
+    'label': 'Green Onions'
+  }
+  modify_entry_2 = {
+    'is_done': True
+  }
+
+  grocery_item = modify_db_entry_with_new_input(grocery_item, modify_entry_1)
+  assert grocery_item.label == modify_entry_1['label']
+
+  grocery_item = modify_db_entry_with_new_input(grocery_item, modify_entry_2)
+  assert grocery_item.is_done == modify_entry_2['is_done']
+
+
+  
+  
+
 def spoof_gaphene_object(model, sqlalchemy_object, remove_sa_instance_state=True):
   """Expects model as string, not the class"""
   graphene_spoof = {}

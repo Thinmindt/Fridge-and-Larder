@@ -17,6 +17,18 @@ mutations = {
         ok
       }
     }
+  ''',
+
+  'modify_grocery_item': '''
+    mutation modifyGroceryItem ($modifyGroceryItemInput:ModifyGroceryItemInput!) {
+      modifyGroceryItem(input:$modifyGroceryItemInput) {
+        groceryItem {
+          id,
+          label, 
+          isDone
+        }
+      }
+    }
   '''
 }
 queries = {
@@ -78,3 +90,22 @@ def test_query_grocery_item(session, graphene_client, snapshot):
   }
   graphene_client.execute(mutations['create_grocery_item'], variables=variables)
   snapshot.assert_match(graphene_client.execute(queries['grocery_item'], variables=variables))
+
+def test_modify_grocery_item(session, graphene_client, snapshot):
+  variables = {
+    "label": "Celery",
+    "modifyGroceryItemInput": {
+      "id": "R3JvY2VyeUl0ZW1PYmplY3Q6MQ==",
+      "label": "Onions"
+    }
+  }
+  graphene_client.execute(mutations['create_grocery_item'], variables=variables)
+  snapshot.assert_match(graphene_client.execute(mutations['modify_grocery_item'], variables=variables))
+
+  variables = {
+    "modifyGroceryItemInput": {
+      "id": "R3JvY2VyeUl0ZW1PYmplY3Q6MQ==",
+      "isDone": 'true'
+    }
+  }
+  snapshot.assert_match(graphene_client.execute(mutations['modify_grocery_item'], variables=variables))

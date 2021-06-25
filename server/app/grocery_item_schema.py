@@ -2,7 +2,7 @@ from app.models import GroceryItem
 import graphene
 from graphene_sqlalchemy import SQLAlchemyObjectType
 from app.models import GroceryItem
-from app.db_interface import add_entry_to_db, delete_entry_from_db, get_db_entry_from_gql_input
+from app.db_interface import add_entry_to_db, delete_entry_from_db, get_db_entry_from_gql_input, modify_db_entry_with_new_input
 
 class GroceryItemAttribute:
   """Description of Grocery Item table"""
@@ -47,3 +47,20 @@ class DeleteGroceryItem(graphene.Mutation):
     delete_entry_from_db(grocery_item)
 
     return DeleteGroceryItem(ok=True)
+
+class ModifyGroceryItemInput(graphene.InputObjectType):
+  id = graphene.ID(required=True, description="Global ID of grocery item")
+  label = graphene.String(required=False, description="Label given to this item")
+  is_done = graphene.Boolean(required=False, desciption="Is this item completed or not")
+
+class ModifyGroceryItem(graphene.Mutation):
+  """Change something data in the grocery item"""
+  grocery_item = graphene.Field(lambda: GroceryItemObject)
+
+  class Arguments:
+    input = ModifyGroceryItemInput(required=True)
+  
+  def mutate(self, info, input):
+    grocery_item_original = get_db_entry_from_gql_input(GroceryItem, input)
+    grocery_item_modified = modify_db_entry_with_new_input(grocery_item_original, input)
+    return ModifyGroceryItem(grocery_item = grocery_item_modified)
