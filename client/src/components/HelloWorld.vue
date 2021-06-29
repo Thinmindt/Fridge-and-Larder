@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{ allGroceryItems }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -31,10 +31,28 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  }
+  data: {
+    allGroceryItems: ''
+  }
+  apollo: {
+    allGroceryItems: gql`query allGroceryItems {
+      allGroceryItems {
+        edges {
+          node {
+            id,
+            label,
+            isDone
+          }
+        }
+      }
+    }`
   }
 }
 </script>
