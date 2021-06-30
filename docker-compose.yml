@@ -5,7 +5,6 @@ services:
     build: ./client
     container_name: client
     restart: always
-    command: npm run serve --port 5000 --host 0.0.0.0
     # mounted volumes for hot reloading
     volumes:
       - './client:/client'
@@ -33,6 +32,8 @@ services:
     
   database:
     image: postgres
+    container_name: database
+    restart: always
     volumes:
       - ./data/db:/var/lib/postgres/data
     environment:
