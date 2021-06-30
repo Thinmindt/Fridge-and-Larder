@@ -23,3 +23,7 @@ To start developing:
   - Navigate to the Tasks/serve tab
   - Change Parameters settings Host to '0.0.0.0' and Port to '5000'
   - Serve the client from the CLI for hot reloading.
+
+
+To regenerate graphql.schema file:
+  - run "flask generate_schema" in the server directory

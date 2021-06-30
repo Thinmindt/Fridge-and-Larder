@@ -3,6 +3,8 @@
     "target": "es5",
     "module": "esnext",
     "strict": true,
+    // Allow importing js file in ts context
+    // "allowJs": true,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
@@ -36,6 +38,7 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ]
 }

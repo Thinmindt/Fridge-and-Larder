@@ -4,5 +4,8 @@ WORKDIR /client
 RUN npm install -g @vue/cli
 COPY ["./package.json", "./package-log.json*", "./"]
 RUN npm install
+RUN npm install -g get-graphql-schema
 COPY . .
-CMD [ "vue", "ui", "--headless", "--port", "8000", "--host", "0.0.0.0" ]
+RUN sed -i 's/\r//g' ./up.sh  && \  
+    chmod +x ./up.sh
+ENTRYPOINT sh up.sh

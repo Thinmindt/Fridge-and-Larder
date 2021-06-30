@@ -15,15 +15,35 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
   },
+  plugins: [
+    'graphql'
+  ],
+  rules: {
+    "graphql/template-strings": ['error', {
+      // Import default settings for GraphQL client: apollo
+      env: 'apollo',
+
+      // Import schema in Schema Language format here
+      schemaJson: require('./schema.json')
+    }]
+  },
   overrides: [
     {
       files: [
         '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+        '**/tests/unit/**/*.spec.{j,t}s?(x)',
       ],
       env: {
         mocha: true
       }
+    },
+    {
+      files: [
+        "*.gql",
+        "*.graphql"
+      ],
+      parser: "@graphql-eslint/eslint-plugin",
+      plugins: ["@graphql-eslint"]
     }
   ]
 }
